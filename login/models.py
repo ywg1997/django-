@@ -4,7 +4,7 @@ from django.db import models
 # login/models.py
 
 from django.db import models
-
+#创建
 
 class User(models.Model):
     '''用户表'''
