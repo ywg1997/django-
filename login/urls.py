@@ -3,6 +3,7 @@ from django.urls import path,include
 
 import login
 from login import views
+#配置url
 
 urlpatterns = [
 
