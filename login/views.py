@@ -8,7 +8,7 @@ from login import models
 # Create your views here.
 import json
 
-
+#实现登录功能
 @csrf_exempt
 def login(request):
     if request.content_type != 'application/json':
@@ -38,7 +38,7 @@ def login(request):
 def logout(request):
     pass
 
-
+#实现注册功能
 @csrf_exempt
 def register(request):
     my_dict = getDict(request)
@@ -71,7 +71,7 @@ def register(request):
                 message_tips = "注册成功！"
                 return JsonResponse({'message_tips': message_tips})
 
-
+#向数据库创建一个新的用户
 def createUser(username, password, email, sex):
     '''
 
@@ -88,12 +88,13 @@ def createUser(username, password, email, sex):
     new_user.sex = sex
     new_user.save()
 
+ #提取json表单
 def getDict(request):
     message = request.body.decode()
     my_json = json.loads(message)
     my_dict = dict(my_json)
     return my_dict
-
+#错误类型提示
 def getWrongRespoonse(num):
     status=[
         '请求类型不是Json!',
@@ -103,13 +104,13 @@ def getWrongRespoonse(num):
     wrongType=[-1,-2]
     return JsonResponse({"status": wrongType[num], "message": message})
 
-
+#错误类型提示
 def getWronglogin(num):
     status=[
         '密码错误',
         ''
     ]
-
+#对输入的数据进行hash以增加其安全性
 def hashCode(s,salt='login_1_login'):
     h=hashlib.sha256()
     s+=salt
